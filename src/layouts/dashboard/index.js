@@ -11,20 +11,20 @@ import {
   AddDirectConversation,
   AddDirectMessage,
 } from "../../redux/slices/conversation";
-import AudioCallNotification from "../../sections/dashboard/Audio/CallNotification";
-import VideoCallNotification from "../../sections/dashboard/video/CallNotification";
+import AudioCallNotification from "../../sections/Dashboard/Audio/CallNotification";
+import VideoCallNotification from "../../sections/Dashboard/video/CallNotification";
 import {
   PushToAudioCallQueue,
   UpdateAudioCallDialog,
 } from "../../redux/slices/audioCall";
-import AudioCallDialog from "../../sections/dashboard/Audio/CallDialog";
-import VideoCallDialog from "../../sections/dashboard/video/CallDialog";
+import AudioCallDialog from "../../sections/Dashboard/Audio/CallDialog";
+import VideoCallDialog from "../../sections/Dashboard/video/CallDialog";
 import { PushToVideoCallQueue, UpdateVideoCallDialog } from "../../redux/slices/videoCall";
 
 const DashboardLayout = () => {
   const isDesktop = useResponsive("up", "md");
   const dispatch = useDispatch();
-  const {user_id} = useSelector((state) => state.auth);
+  const { user_id } = useSelector((state) => state.auth);
   const { open_audio_notification_dialog, open_audio_dialog } = useSelector(
     (state) => state.audioCall
   );
@@ -39,7 +39,7 @@ const DashboardLayout = () => {
   useEffect(() => {
     dispatch(FetchUserProfile());
   }, []);
-  
+
 
   const handleCloseAudioDialog = () => {
     dispatch(UpdateAudioCallDialog({ state: false }));
@@ -67,7 +67,7 @@ const DashboardLayout = () => {
         // TODO => dispatch an action to add this in call_queue
         dispatch(PushToAudioCallQueue(data));
       });
-      
+
       socket.on("video_call_notification", (data) => {
         // TODO => dispatch an action to add this in call_queue
         dispatch(PushToVideoCallQueue(data));
